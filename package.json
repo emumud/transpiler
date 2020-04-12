@@ -1,0 +1,24 @@
+{
+  "name": "transpiler",
+  "version": "1.0.0",
+  "description": "Emumud's transpiler for turning hackmud scripts into usable JS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emumud/transpiler.git"
+  },
+  "keywords": [
+    "emumud",
+    "hackmud",
+    "transpiler"
+  ],
+  "author": "Duck Industries",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emumud/transpiler/issues"
+  },
+  "homepage": "https://github.com/emumud/transpiler#readme"
+}
