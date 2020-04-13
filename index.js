@@ -19,8 +19,8 @@ function transpileScript(origContent) {
 
   const conversionValues = [
     'logging.log($1)',
-    'transpiler.runScriptName(\'$2\', emumud_context, undefined)',
-    'transpiler.runScriptName(\'$2\', emumud_context, $3)',
+    'emumudInternals.runner.runScriptName(\'$2\', emumud_context, undefined)',
+    'emumudInternals.runner.runScriptName(\'$2\', emumud_context, $3)',
   ];
 
   let content = `'use strict'; // transpiled with emumud transpiler v${version}\n${origContent}`;
