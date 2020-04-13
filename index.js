@@ -18,7 +18,7 @@ function transpileScript(origContent) {
   ];
 
   const conversionValues = [
-    'global.logging.log($1)',
+    'emumudInternals.logging.log($1)',
     'emumudInternals.runner.runScriptName(\'$2\', emumud_context, undefined)',
     'emumudInternals.runner.runScriptName(\'$2\', emumud_context, $3)',
   ];
