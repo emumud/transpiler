@@ -2,19 +2,15 @@ const fs = require('fs');
 
 const debugLogRegex = /\B#D\((.*)\)/g;
 
-const version = require('package.json').version;
+const version = require('./package.json').version;
 
-async function transpileFile(filepath, quiet = false) {
-  const origContent = await fs.promises.readFile(filepath);
+function transpileFile(filepath) {
+  const origContent = fs.readFileSync(filepath);
 
-  return transpileScript(origContent, quiet);
+  return transpileScript(origContent);
 }
 
-function transpileScript(origContent, quiet = false) {
-  let log = quiet ? function() {} : process.stdout.write;
-
-  log('Preparing');
-
+function transpileScript(origContent) {
   const conversionKeys = [
     debugLogRegex,
     /(#[fhmln0-4]s)\.([a-z][0-z]{0,24}\.[0-z]*)\(\)/g,
@@ -26,8 +22,6 @@ function transpileScript(origContent, quiet = false) {
     'transpiler.runScriptName(\'$2\', emumud_context, undefined)',
     'transpiler.runScriptName(\'$2\', emumud_context, $3)',
   ];
-
-  log('\rInterpreting');
 
   let content = `'use strict'; // transpiled with emumud transpiler v${version}\n${origContent}`;
 
@@ -41,17 +35,11 @@ function transpileScript(origContent, quiet = false) {
     return `function run(${context || ''}${comma || ''}${args || ''}${end} // eslint-disable-line no-unused-vars`;
   });
 
-  log('\rTranspiling');
-
   for (let i = 0; i < conversionValues.length; i++) {
     content = content.replace(conversionKeys[i], conversionValues[i].replace('CONTEXT_ARG', contextName).replace('ARGS_ARG', argsName));
   }
 
-  log('\rFinalising');
-
   content += '\nrun(emumud_context, emumud_args);';
-
-  log('\rComplete\n');
 
   return {
     transpiled: content,
