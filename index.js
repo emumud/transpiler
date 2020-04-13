@@ -41,10 +41,7 @@ function transpileScript(origContent) {
 
   content += '\nrun(emumud_context, emumud_args);';
 
-  return {
-    transpiled: content,
-    original: origContent,
-  };
+  return content;
 }
 
 function hasDebugLogs(originalContent) {
